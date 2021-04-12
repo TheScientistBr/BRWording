@@ -42,7 +42,7 @@ from brwording import brwording
 
 w = brwording.wording()
 
-w.load_file('data/crashcourse.txt',type='txt')
+w.load_file('data/example.txt',type='txt')
 w.build_tf_idf(lemmatizer=True,stopwords=True)
 
 w.tfidf
