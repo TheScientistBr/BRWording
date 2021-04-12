@@ -67,8 +67,12 @@ if you want to create a wordcloud
 ```python
 w.word_cloud()
 
-
 ```
+
+**output**
+
+![img](https://github.com/TheScientistBr/BRWording/blob/main/images/wc.png?raw=true)
+
 <hr>
 <BR>
 
