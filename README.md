@@ -18,6 +18,9 @@ Create an easy Text Analytics in *`One-Line-Code`*
 - Graphical interpretation
 - Word Cloud
 
+The TF-IDF was calculated by:
+
+![img](https://github.com/TheScientistBr/BRWording/blob/main/images/tf-idf.png?raw=true)
 
 <hr>
 

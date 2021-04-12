@@ -83,13 +83,15 @@ class wording:
         text = self.del_punck(text)
         text = text.lower()
         for word in text.split(' '):
-            if len(word) > 3:
+            if len(word) > 3 and stopwords:
                 if stopwords:
                     result = ''.join([str(x) for x in self.df_stopwords[self.df_stopwords['stopword'] == word]['stopword']])
                     if len(result) == 0:
                         output.append(word)
                 else:
                     output.append(word)
+            else:
+                output.append(word)
         return(output)
     
     def del_punck(self, text):
