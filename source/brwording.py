@@ -1,6 +1,11 @@
 import pandas as pd
 import string
 import numpy as np
+import pkg_resources
+import seaborn as sns
+from PIL import Image
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
 
 class wording:
     
@@ -8,6 +13,8 @@ class wording:
         self.df_lema = self.load_lema()
         self.df_stopwords = self.load_stopwords()
         self.tfidf = pd.DataFrame()
+        self.positive_words = self.load_positive_words()
+        self.negative_words = self.load_negative_words()
         
     def load_file(self, file='none', type='txt', header=False, sep=',', column='None'):
         if file == 'none':
@@ -40,12 +47,34 @@ class wording:
         self.colection = df.copy()
         
     def load_lema(self):
-        df_lema = pd.read_csv('config/lematizer.csv', sep=',')
+        resource_package = __name__
+        file = '/'.join(('config', 'lematizer.csv'))
+        file_path = pkg_resources.resource_filename(resource_package, file)
+        df_lema = pd.read_csv(file_path, sep=',')
         df_lema.columns = ['word','lema']
         return(df_lema)
+
+    def load_positive_words(self):
+        resource_package = __name__
+        file = '/'.join(('config', 'positive.csv'))
+        file_path = pkg_resources.resource_filename(resource_package, file)
+        df_pw = pd.read_csv(file_path)
+        df_pw.columns = ['word']
+        return(df_pw)
+
+    def load_negative_words(self):
+        resource_package = __name__
+        file = '/'.join(('config', 'negative.csv'))
+        file_path = pkg_resources.resource_filename(resource_package, file)
+        df_pw = pd.read_csv(file_path)
+        df_pw.columns = ['word']
+        return(df_pw)
     
     def load_stopwords(self):
-        df_sw = pd.read_csv('config/stopwords.csv', sep=';', header=None)
+        resource_package = __name__
+        file = '/'.join(('config', 'stopwords.csv'))
+        file_path = pkg_resources.resource_filename(resource_package, file)
+        df_sw = pd.read_csv(file_path, sep=';', header=None)
         df_sw.columns = ['stopword']
         return(df_sw)
     
@@ -54,18 +83,20 @@ class wording:
         text = self.del_punck(text)
         text = text.lower()
         for word in text.split(' '):
-            if stopwords:
-                result = ''.join([str(x) for x in self.df_stopwords[self.df_stopwords['stopword'] == word]['stopword']])
-                if result == '':
+            if len(word) > 3:
+                if stopwords:
+                    result = ''.join([str(x) for x in self.df_stopwords[self.df_stopwords['stopword'] == word]['stopword']])
+                    if len(result) == 0:
+                        output.append(word)
+                else:
                     output.append(word)
-            else:
-                output.append(word)
         return(output)
     
     def del_punck(self, text):
         punck = ",.;/<>:?[]{}+_)(*&$#@!)1234567890\n\t\r"
         for c in punck:
             text = text.replace(c,'')
+        text = text.replace('&quot', '')
         return(text)
     
     def get_lema(self, text, lemmatizer=True):
@@ -110,4 +141,38 @@ class wording:
             f.loc[i:i,'idf'] = float(idf[idf['word'] == w]['log'])    
         f['tf_idf'] = f['tf'] * f['idf']
         self.tfidf = f.copy()
+        self.set_sign()
+
+    def set_sign(self):
+        self.tfidf['sign'] = ''
+        for i in range(self.tfidf.shape[0]):
+            word = self.tfidf.loc[i,'word']
+            p = self.positive_words[self.positive_words['word'] == word]
+            n = self.negative_words[self.negative_words['word'] == word]
+            if len(p) == 0 and len(n) > 0:
+                self.tfidf.loc[i,'sign'] = 'negative'
+            elif len(p) == 0 and len(n) == 0:
+                self.tfidf.loc[i,'sign'] = 'neutral'
+            elif len(p) > 0 and len(n) == 0:
+                self.tfidf.loc[i,'sign'] = 'positive'
+            elif len(p) > 0 and len(n) > 0:
+                self.tfidf.loc[i,'sign'] = 'ambiguous'  
+                
+    def sentimental_graf(self):
+        bar = pd.DataFrame(self.tfidf['sign'].value_counts()).reset_index()
+        bar.columns = ['Sentimental','frequency']
+        sns.barplot(x='Sentimental', y='frequency', data=bar)
     
+    def word_cloud(self, picture='none'):
+        resource_package = __name__
+        file = '/'.join(('config', 'cloud.jpeg'))
+        file_path = pkg_resources.resource_filename(resource_package, file)
+        if picture == 'none':
+            mask = np.array(Image.open(file_path))
+        tuples = [tuple(x) for x in self.tfidf[['word','tf_idf']].values]
+        wc = WordCloud(background_color="white", max_words=1000, mask=mask).generate_from_frequencies(frequencies=dict(tuples))
+        plt.figure(figsize=(15,15))
+        plt.imshow(wc, interpolation="bilinear")
+        plt.axis("off")
+        plt.show()        
+        
