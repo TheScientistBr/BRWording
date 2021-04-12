@@ -61,11 +61,11 @@ w.sentimental_graf()
 **output**
 ![img](https://github.com/TheScientistBr/BRWording/blob/main/images/graf_sentimental.png?raw=true)
 
-if you want to create a wordcloud
+if you want to create a wordcloud, just strike the folowing command, but if you want to create a cloud with your own mask, just pass you image address as `picture`
 
 `sintax`:
 ```python
-w.word_cloud()
+w.word_cloud(picture='none')
 
 ```
 
