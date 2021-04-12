@@ -48,13 +48,7 @@ w.tfidf
 
 **Output**
 
-|ID	|doc	|word	|f	|tf	|idf	|tf_idf	|sign|
-+---+-------+-------+---+---+-------+-------+----+
-|0	|doc-0	|bonito	|1	|1.0	|1.584963	|1.584963	|positive|
-1	doc-0	gato	1	1.0	2.584963	2.584963	neutral
-2	doc-1	cachorro	1	1.0	2.584963	2.584963	neutral
-3	doc-1	feliz	1	1.0	1.584963	1.584963	positive
-4	doc-2	animal	1	1.0	1.000000	1.000000	neutral
+![img](https://github.com/TheScientistBr/BRWording/blob/main/images/tfidf.png?raw=true)
 
 If want to see the sentimental Graphical interpretation
 
@@ -64,6 +58,8 @@ If want to see the sentimental Graphical interpretation
 w.sentimental_graf()
 
 ```
+**output**
+![img](https://github.com/TheScientistBr/BRWording/blob/main/images/graf_sentimental.png?raw=true)
 
 if you want to create a wordcloud
 
