@@ -158,11 +158,19 @@ class wording:
             elif len(p) > 0 and len(n) > 0:
                 self.tfidf.loc[i,'sign'] = 'ambiguous'  
                 
-    def sentimental_graf(self):
+    def sentimental_graf(self, rotate=False):
         bar = pd.DataFrame(self.tfidf['sign'].value_counts()).reset_index()
         bar.columns = ['Sentimental','frequency']
-        sns.barplot(x='Sentimental', y='frequency', data=bar)
+        if rotate:
+            sns.barplot(y='Sentimental', x='frequency', data=bar)
+        else:
+            sns.barplot(x='Sentimental', y='frequency', data=bar)
     
+    def sentimental_table(self):
+        bar = pd.DataFrame(self.tfidf['sign'].value_counts()).reset_index()
+        bar.columns = ['Sentimental','frequency']
+        print(bar)
+        
     def word_cloud(self, picture='none'):
         resource_package = __name__
         file = '/'.join(('config', 'cloud.jpeg'))
