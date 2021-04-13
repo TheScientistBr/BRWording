@@ -4,7 +4,7 @@ Create an easy Text Analytics in *`One-Line-Code`*
 
 <hr>
 
-![](https://img.shields.io/badge/pypi-0.0.1-blue) ![](https://img.shields.io/badge/python-3.7|3.8|3.9-lightblue) ![](https://img.shields.io/badge/Licence-MIT-lightgray) ![](https://img.shields.io/badge/status-Beta-darkgreen) ![](https://img.shields.io/badge/pipeline-passed-green) ![](https://img.shields.io/badge/testing-passing-green) ![](https://img.shields.io/badge/TheScientist-APP-brown)
+![](https://img.shields.io/badge/pypi-0.0.3-blue) ![](https://img.shields.io/badge/python-3.7|3.8|3.9-lightblue) ![](https://img.shields.io/badge/Licence-MIT-lightgray) ![](https://img.shields.io/badge/status-Beta-darkgreen) ![](https://img.shields.io/badge/pipeline-passed-green) ![](https://img.shields.io/badge/testing-passing-green) ![](https://img.shields.io/badge/TheScientist-APP-brown)
 
 
 **Main Features:**
@@ -75,6 +75,23 @@ w.word_cloud(picture='none')
 **output**
 
 ![img](https://github.com/TheScientistBr/BRWording/blob/main/images/wc.png?raw=true)
+
+<hr>
+<BR>
+
+**Looking for a word into colection**
+
+if you want to see what files on your colection has a word, run `look2word` 
+
+`sintax`:
+```python
+w.look2word('bonito')
+
+```
+
+<BR>
+
+New features are incoming...
 
 <hr>
 <BR>

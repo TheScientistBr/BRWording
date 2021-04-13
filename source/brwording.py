@@ -83,13 +83,11 @@ class wording:
         text = self.del_punck(text)
         text = text.lower()
         for word in text.split(' '):
-            if len(word) > 3 and stopwords:
-                if stopwords:
+            if stopwords:
+                if len(word) > 3:
                     result = ''.join([str(x) for x in self.df_stopwords[self.df_stopwords['stopword'] == word]['stopword']])
                     if len(result) == 0:
                         output.append(word)
-                else:
-                    output.append(word)
             else:
                 output.append(word)
         return(output)
@@ -171,10 +169,15 @@ class wording:
         file_path = pkg_resources.resource_filename(resource_package, file)
         if picture == 'none':
             mask = np.array(Image.open(file_path))
+        else:
+            mask = np.array(Image.open(picture))
         tuples = [tuple(x) for x in self.tfidf[['word','tf_idf']].values]
         wc = WordCloud(background_color="white", max_words=1000, mask=mask).generate_from_frequencies(frequencies=dict(tuples))
         plt.figure(figsize=(15,15))
         plt.imshow(wc, interpolation="bilinear")
         plt.axis("off")
         plt.show()        
+        
+    def look2word(self, word):
+        return(self.colection[self.colection['word'].str.contains(word)])
         
