@@ -4,7 +4,7 @@ Create an easy Text Analytics in *`One-Line-Code`*
 
 <hr>
 
-![](https://img.shields.io/badge/pypi-0.0.5-blue) ![](https://img.shields.io/badge/python-5.7|5.8|5.9-lightblue) ![](https://img.shields.io/badge/Licence-MIT-lightgray) ![](https://img.shields.io/badge/status-Beta-darkgreen) ![](https://img.shields.io/badge/pipeline-passed-green) ![](https://img.shields.io/badge/testing-passing-green) ![](https://img.shields.io/badge/TheScientist-APP-brown)
+![](https://img.shields.io/badge/pypi-0.0.5-blue) ![](https://img.shields.io/badge/python-3.7|3.8|3.9-lightblue) ![](https://img.shields.io/badge/Licence-MIT-lightgray) ![](https://img.shields.io/badge/status-Beta-darkgreen) ![](https://img.shields.io/badge/pipeline-passed-green) ![](https://img.shields.io/badge/testing-passing-green) ![](https://img.shields.io/badge/TheScientist-APP-brown)
 
 
 **Main Features:**
