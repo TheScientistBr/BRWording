@@ -131,11 +131,11 @@ class wording:
         n = df.shape[0]
         f = f.groupby(by=['doc','word']).count().reset_index()
         f.rename(columns={'count':'f'},inplace=True)
-        f['tf'] = 1 + np.log2(f['f'])
+        f['tf'] = np.log2(f['f'])
         f['idf'] = 0    
         idf = f.groupby(by=['word']).count().reset_index()[['word','tf']]
         idf.rename(columns={'tf':'idf'}, inplace=True)    
-        idf['log'] = np.log2(n/idf['idf'])
+        idf['log'] = np.log2(1+ (n/idf['idf']))
         for i in range(f.shape[0]):
             w = ''.join(f.loc[i:i,'word'])
             f.loc[i:i,'idf'] = float(idf[idf['word'] == w]['log'])    
