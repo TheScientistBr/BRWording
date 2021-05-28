@@ -4,7 +4,7 @@ Create an easy Text Analytics in *`One-Line-Code`*
 
 <hr>
 
-![](https://img.shields.io/badge/pypi-0.0.5-blue) ![](https://img.shields.io/badge/python-3.7|3.8|3.9-lightblue) ![](https://img.shields.io/badge/Licence-MIT-lightgray) ![](https://img.shields.io/badge/status-Beta-darkgreen) ![](https://img.shields.io/badge/pipeline-passed-green) ![](https://img.shields.io/badge/testing-passing-green) ![](https://img.shields.io/badge/TheScientist-APP-brown)
+![](https://img.shields.io/badge/pypi-0.0.6-blue) ![](https://img.shields.io/badge/python-3.7|3.8|3.9-lightblue) ![](https://img.shields.io/badge/Licence-MIT-lightgray) ![](https://img.shields.io/badge/status-Beta-darkgreen) ![](https://img.shields.io/badge/pipeline-passed-green) ![](https://img.shields.io/badge/testing-passing-green) ![](https://img.shields.io/badge/TheScientist-APP-brown)
 
 
 **Main Features:**
@@ -53,8 +53,8 @@ The fields to `load_file` are:
 1. `file`: the file path 
 2. `type`: file type, can be `txt csv` or `excel`
 3. `header`: if you are reading a csv file, so you must tell if this file has a header or not (`False` or `True`)
-5. `sep`: if you are reading a csv file, you must tell what kind field separator you want
-5. `column`: if you read a `csv` or `excel`file, you must tell what column you want to parse
+6. `sep`: if you are reading a csv file, you must tell what kind field separator you want
+6. `column`: if you read a `csv` or `excel`file, you must tell what column you want to parse
 
 The method `build_tf_idf` has a default `True`option for both parameters.
 
