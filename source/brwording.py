@@ -243,7 +243,7 @@ class wording:
     def look2word(self, wsearch):
         output = pd.DataFrame({'index': [],'word': []})
         for i in range(self.colection.shape[0]):
-            line = self.colection.loc[i,'word']
+            line = self.del_punck(self.colection.loc[i,'word'])
             for word in line.split(' '):
                 if word == wsearch:
                     output = output.append(pd.DataFrame({'index':[int(i)],'word':[line]}))
