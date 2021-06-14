@@ -216,14 +216,15 @@ class wording:
         bar = pd.DataFrame(self.tfidf['sign'].value_counts()).reset_index()
         bar.columns = ['Sentimental','frequency']
         if rotate:
-            sns.barplot(y='Sentimental', x='frequency', data=bar)
+            img = sns.barplot(y='Sentimental', x='frequency', data=bar)
         else:
-            sns.barplot(x='Sentimental', y='frequency', data=bar)
+            img = sns.barplot(x='Sentimental', y='frequency', data=bar)
+        return(img)
     
     def sentimental_table(self):
         bar = pd.DataFrame(self.tfidf['sign'].value_counts()).reset_index()
         bar.columns = ['Sentimental','frequency']
-        print(bar)
+        return(bar)
         
     def word_cloud(self, picture='none'):
         resource_package = __name__
