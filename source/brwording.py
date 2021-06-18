@@ -239,7 +239,7 @@ class wording:
         plt.figure(figsize=(15,15))
         plt.imshow(wc, interpolation="bilinear")
         plt.axis("off")
-        plt.show()        
+        return(plt)
         
     def look2word(self, wsearch):
         output = pd.DataFrame({'index': [],'word': []})
