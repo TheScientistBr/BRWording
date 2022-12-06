@@ -161,7 +161,7 @@ class wording:
                 text = self.get_lema(text, lemmatizer=lemmatizer)
                 frame_aux['word'] = text
                 frame_aux['doc'] = 'doc-' + str(i)
-                frame_tfidf = frame_tfidf.append(frame_aux)
+                frame_tfidf = pd.concat([frame_tfidf,frame_aux])
         else:
             for i in tqdm(range(df.shape[0])):
                 frame_aux = pd.DataFrame()
@@ -170,7 +170,7 @@ class wording:
                 text = self.get_lema(text, lemmatizer=lemmatizer)
                 frame_aux['word'] = text
                 frame_aux['doc'] = 'doc-' + str(i)
-                frame_tfidf = frame_tfidf.append(frame_aux)
+                frame_tfidf = pd.concat([frame_tfidf,frame_aux])
         frame_tfidf['count'] = 1
         return(frame_tfidf[['doc','word','count']])    
 
@@ -247,7 +247,7 @@ class wording:
             line = self.del_punck(self.colection.loc[i,'word'])
             for word in line.split(' '):
                 if word == wsearch:
-                    output = output.append(pd.DataFrame({'index':[int(i)],'word':[line]}))
+                    output = pd.concat([output,pd.DataFrame({'index':[int(i)],'word':[line]})])
                     break
         output['index'] = output['index'].apply(lambda x: int(x))
         output = output.set_index('index')        
@@ -316,7 +316,7 @@ class wording:
                     raise TypeError("File type " + type + " not permited")
                 df = pd.DataFrame([df])
                 df.columns = ['word']
-                self.colection = self.colection.append(df)
+                self.colection = pd.concat([self.colection,df])
         else:
             for file in tqdm(files):
                 if type == 'pdf':
@@ -351,9 +351,9 @@ class wording:
                     f = open(dir + name_class + '/' + name_file, "r", encoding='utf8', errors='ignore')
                     text = f.read()
                     f.close()                                        
-                    self.colection = self.colection.append(pd.DataFrame({'doc': [name_file],
-                                                                        'word': [text],
-                                                                        'class': [name_class]}))
+                    self.colection = pd.concat([self.colection,pd.DataFrame({'doc': [name_file],
+                                                                            'word': [text],
+                                                                            'class': [name_class]})])
         else:
             for name_class in tqdm(classes):
                 files =  [x for x in os.listdir(dir + name_class)]
@@ -363,8 +363,8 @@ class wording:
                     f = open(dir + name_class + '/' + name_file, "r", encoding='utf8', errors='ignore')
                     text = f.read()
                     f.close()                                        
-                    self.colection = self.colection.append(pd.DataFrame({'doc': [name_file],
-                                                                        'word': [text],
-                                                                        'class': [name_class]}))
+                    self.colection = pd.concat([self.colection,pd.DataFrame({'doc': [name_file],
+                                                                            'word': [text],
+                                                                            'class': [name_class]})])
                     
             
