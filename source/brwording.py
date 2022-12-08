@@ -126,9 +126,9 @@ class wording:
                 if len(word) > 3:
                     result = ''.join([str(x) for x in self.df_stopwords[self.df_stopwords['stopword'] == word]['stopword']])
                     if len(result) == 0:
-                        output.append(word)
+                        output = output + [word]
             else:
-                output.append(word)
+                output = output + [word]
         return(output)
     
     def del_punck(self, text):
@@ -144,11 +144,11 @@ class wording:
             if lemmatizer:
                 w_lema = ''.join([self.df_lema[self.df_lema['lema'] == word]['word'].unique()][0])
                 if len(w_lema) == 0:
-                    output.append(word)
+                    output = output + [word]
                 else:
-                    output.append(w_lema)
+                    output = output + [w_lema]
             else:
-                output.append(word)
+                output = output + [word]
         return(output)
     
     def build_tf(self, df, stopwords=True, lemmatizer=True, silence=False):
@@ -331,7 +331,7 @@ class wording:
                     raise TypeError("File type " + type + " not permited")
                 df = pd.DataFrame([df])
                 df.columns = ['word']
-                self.colection = self.colection.append(df)
+                self.colection = pd.concat([self.colection,df])
 
     def load_class_colection(self, dir='none', silence=False):
         if dir == 'none':
